@@ -49,7 +49,7 @@ app.get('/weather',async(req,res)=>{
 
 // criando uma rota multiple  para exibir mais de uma cidade
 
-/*
+
 app.get('/multiple',async(req,res) => {
     const {cities}= req.query;
     // verifico se cities esta vazio
@@ -60,14 +60,14 @@ app.get('/multiple',async(req,res) => {
     const results =[]; // Lista para armazenar os resultados
     try {
         for (let city of cityList){
-            const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&APPID=${apiKey}&units=metric&lang=pt_br`);
+            const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=pt_br`);
         
         // results.push o push serve para adicionar elementos na lista
         results.push({city,temperature: response.data.main?.temp ??0,
             weather: response.data.weather?.[0]?.description??'Desconhecido'});
         
     }
-    res.json(results);
+res.json(results);
     
 }  catch(err){
         res.status(500).json({error:'Erro ao consultar api para multiplas cidades'});
@@ -75,9 +75,9 @@ app.get('/multiple',async(req,res) => {
     }
 
 });
-*/
 
-app.get('/multiple', async (req, res) => {
+
+/*app.get('/multiple', async (req, res) => {
     const { cities } = req.query;
 
     if (!cities) {
@@ -106,7 +106,7 @@ app.get('/multiple', async (req, res) => {
         res.status(500).json({ error: 'Erro ao consultar API para múltiplas cidades.'})
     }    
 });
-
+*/
 
 app.get('/alert', async (req, res) => {
     const { city, country } = req.query;
@@ -116,8 +116,7 @@ app.get('/alert', async (req, res) => {
     }
 
     try {
-        const response = await axios.get (`https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${apiKey}&units=metric&lang=pt_br`
-        );
+        const response = await axios.get (`https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${apiKey}&units=metric&lang=pt_br`);
 
         const temp = response.data.main?.temp ?? 0;
 
